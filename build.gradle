@@ -30,6 +30,9 @@ dependencies {
 	// mysql
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	// devtools
+	compileOnly("org.springframework.boot:spring-boot-devtools")
+
 	// test (junit5 & assertj 포함되어 있음)
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
