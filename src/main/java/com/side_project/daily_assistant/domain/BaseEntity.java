@@ -1,4 +1,4 @@
-package com.side_project.general_board.domain;
+package com.side_project.daily_assistant.domain;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
