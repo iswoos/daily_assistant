@@ -23,5 +23,4 @@ public class MemberAdapter {
     public Member registerMember(@RequestBody RegisterMember registerMember) {
         return registerMemberUseCase.registerMember(registerMember);
     }
-
 }
