@@ -1,8 +1,8 @@
-package com.side_project.daily_assistant.service;
+package com.side_project.daily_assistant.service.member;
 
-import com.side_project.daily_assistant.adapter.in.MemberAdapter;
-import com.side_project.daily_assistant.application.port.in.RegisterMemberUseCase;
-import com.side_project.daily_assistant.application.port.out.RegisterMemberPort;
+import com.side_project.daily_assistant.adapter.in.member.MemberController;
+import com.side_project.daily_assistant.application.port.in.member.RegisterMemberUseCase;
+import com.side_project.daily_assistant.application.port.out.member.RegisterMemberPort;
 import com.side_project.daily_assistant.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class MemberService implements RegisterMemberUseCase {
+public class RegisterMemberService implements RegisterMemberUseCase {
 
     private final RegisterMemberPort registerMemberPort;
 
     @Override
-    public Member registerMember(MemberAdapter.RegisterMember registerMember) {
-        return registerMemberPort.registerMember(registerMember);
+    public void registerMember(MemberController.RegisterMember registerMember) {
+        registerMemberPort.registerMember(registerMember);
     }
 
     //    private final MemberRepository memberRepository;

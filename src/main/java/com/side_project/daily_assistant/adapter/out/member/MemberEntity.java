@@ -1,4 +1,4 @@
-package com.side_project.daily_assistant.adapter.out;
+package com.side_project.daily_assistant.adapter.out.member;
 
 import com.side_project.daily_assistant.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@Table(name = "member")
 public class MemberEntity extends BaseEntity {
 
     @Id
