@@ -4,7 +4,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/daily_assistant_db?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3307/daily_assistant_db?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
     #    url : jdbc:mysql://database-1.cnlz5hxwnmxi.ap-northeast-2.rds.amazonaws.com:3306/demo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&useSSL=false
     #    url: jdbc:mysql://localhost:3306/local?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
