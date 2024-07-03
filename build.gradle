@@ -12,9 +12,10 @@ java {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
-
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
@@ -34,6 +35,12 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+	//spring AI
+	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
+	// Replace the following with the starter dependencies of specific modules you wish to use
+	implementation 'org.springframework.ai:spring-ai-openai'
+	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
 
 //	// jwt
 //	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'

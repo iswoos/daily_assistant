@@ -23,9 +23,16 @@ spring:
     activate:
       on-profile: local
 
+  ai:
+    openai:
+      api-key: {'key 정보'}
+      embedding:
+        options:
+          { '사용할 모델정보' }:
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     #   날아가는 SQL확인하고 싶을 때 활성화
     show-sql: true
     properties:
