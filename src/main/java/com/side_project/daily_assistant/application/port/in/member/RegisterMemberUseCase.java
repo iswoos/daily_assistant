@@ -1,9 +1,9 @@
 package com.side_project.daily_assistant.application.port.in.member;
 
-import com.side_project.daily_assistant.adapter.in.member.MemberController;
+import com.side_project.daily_assistant.dto.requestdto.member.RegisterMemberReq;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface RegisterMemberUseCase {
-    void registerMember(MemberController.RegisterMember registerMember);
+    void registerMember(RegisterMemberReq registerMember);
 }

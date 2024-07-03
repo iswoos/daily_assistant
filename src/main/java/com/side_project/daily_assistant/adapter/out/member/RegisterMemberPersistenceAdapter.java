@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.adapter.out.member;
 
-import com.side_project.daily_assistant.adapter.in.member.MemberController;
 import com.side_project.daily_assistant.application.port.out.member.RegisterMemberPort;
+import com.side_project.daily_assistant.dto.requestdto.member.RegisterMemberReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class RegisterMemberPersistenceAdapter implements RegisterMemberPort {
 
 
     @Override
-    public void registerMember(MemberController.RegisterMember registerMember) {
+    public void registerMember(RegisterMemberReq registerMember) {
         MemberEntity memberEntity = memberMapper.toEntity(registerMember);
         memberRepository.save(memberEntity);
     }

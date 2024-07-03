@@ -1,9 +1,8 @@
 package com.side_project.daily_assistant.adapter.out.member;
 
-import com.side_project.daily_assistant.adapter.in.member.MemberController;
 import com.side_project.daily_assistant.domain.member.Member;
+import com.side_project.daily_assistant.dto.requestdto.member.RegisterMemberReq;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
@@ -12,6 +11,6 @@ public interface MemberMapper {
 
     MemberEntity toEntity(Member domain);
 
-    MemberEntity toEntity(MemberController.RegisterMember registerMember);
+    MemberEntity toEntity(RegisterMemberReq registerMember);
 
 }

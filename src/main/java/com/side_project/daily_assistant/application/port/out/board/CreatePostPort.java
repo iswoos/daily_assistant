@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.application.port.out.board;
 
-import com.side_project.daily_assistant.adapter.in.board.PostController;
+import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 
 public interface CreatePostPort {
-    void createPost(PostController.CreatePost createPost);
+    void createPost(CreatePostReq createPost);
 }

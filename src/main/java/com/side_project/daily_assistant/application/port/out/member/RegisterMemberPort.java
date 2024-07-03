@@ -1,8 +1,7 @@
 package com.side_project.daily_assistant.application.port.out.member;
 
-import com.side_project.daily_assistant.adapter.in.member.MemberController;
-import com.side_project.daily_assistant.domain.member.Member;
+import com.side_project.daily_assistant.dto.requestdto.member.RegisterMemberReq;
 
 public interface RegisterMemberPort {
-    void registerMember(MemberController.RegisterMember registerMember);
+    void registerMember(RegisterMemberReq registerMember);
 }
