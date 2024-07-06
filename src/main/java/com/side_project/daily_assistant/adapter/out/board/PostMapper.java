@@ -5,6 +5,8 @@ import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface PostMapper {
     Post toDomain(PostEntity postEntity);
@@ -14,4 +16,6 @@ public interface PostMapper {
     PostEntity toEntity(CreatePostReq createPost);
 
     GetPostRes toGetPostRes(PostEntity postEntity);
+
+    List<GetPostRes> toListGetPostRes(List<PostEntity> postEntityList);
 }
