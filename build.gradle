@@ -36,11 +36,11 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
-	//spring AI
-	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
-	// Replace the following with the starter dependencies of specific modules you wish to use
-	implementation 'org.springframework.ai:spring-ai-openai'
-	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
+//	//spring AI
+//	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
+//	// Replace the following with the starter dependencies of specific modules you wish to use
+//	implementation 'org.springframework.ai:spring-ai-openai'
+//	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
 
 //	// jwt
 //	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -49,6 +49,10 @@ dependencies {
 //
 //	// security
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// flyway
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-mysql'
 
 	// devtools
 	compileOnly("org.springframework.boot:spring-boot-devtools")

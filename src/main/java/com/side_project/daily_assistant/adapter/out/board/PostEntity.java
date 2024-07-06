@@ -26,4 +26,8 @@ public class PostEntity extends BaseEntity {
     private String image;
 
     private String category;
+
+    private Long view_count;
+
+    private Long likes_count;
 }
