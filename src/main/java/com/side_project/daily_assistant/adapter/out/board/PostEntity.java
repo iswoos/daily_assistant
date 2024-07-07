@@ -19,6 +19,8 @@ public class PostEntity extends BaseEntity {
     @Column(name = "post_id")
     private Long id;
 
+    private String board_category;
+
     private String userId;
 
     private String title;
@@ -27,7 +29,7 @@ public class PostEntity extends BaseEntity {
 
     private String image;
 
-    private String category;
+    private String post_category;
 
     private Long view_count;
 
