@@ -28,8 +28,6 @@ public class PostController {
         return getPostListUseCase.getPostList();
     }
 
-
-
     // 게시글 단건조회
     @GetMapping("/posts/{postId}")
     public GetPostRes getPost(@PathVariable Long postId) {

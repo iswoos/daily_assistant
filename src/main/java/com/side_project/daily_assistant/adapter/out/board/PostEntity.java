@@ -3,11 +3,13 @@ package com.side_project.daily_assistant.adapter.out.board;
 import com.side_project.daily_assistant.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicInsert
 @Builder
 @Table(name = "post")
 public class PostEntity extends BaseEntity {
