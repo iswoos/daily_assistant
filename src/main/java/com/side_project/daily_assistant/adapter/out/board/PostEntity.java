@@ -1,5 +1,5 @@
 package com.side_project.daily_assistant.adapter.out.board;
-
+import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import com.side_project.daily_assistant.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,4 +34,7 @@ public class PostEntity extends BaseEntity {
     private Long view_count;
 
     private Long likes_count;
+
+    @Enumerated(EnumType.STRING)
+    private isDeleted is_deleted;
 }

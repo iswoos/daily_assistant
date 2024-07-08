@@ -1,6 +1,7 @@
 package com.side_project.daily_assistant.adapter.out.comment;
 
 import com.side_project.daily_assistant.adapter.out.board.PostEntity;
+import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -35,4 +36,7 @@ public class CommentEntity {
     private List<CommentEntity> replies = new ArrayList<>();
 
     private String content;
+
+    @Enumerated(EnumType.STRING)
+    private isDeleted is_deleted;
 }
