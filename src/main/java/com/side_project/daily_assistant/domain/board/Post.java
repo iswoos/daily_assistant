@@ -32,6 +32,10 @@ public class Post {
     private isDeleted is_deleted;
 
     public void deleted(isDeleted is_deleted) {
+        setDeleted(is_deleted);
+    }
+
+    private void setDeleted(isDeleted is_deleted) {
         this.is_deleted = is_deleted;
     }
 }
