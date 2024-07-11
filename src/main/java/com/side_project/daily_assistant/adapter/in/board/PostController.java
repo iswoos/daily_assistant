@@ -1,8 +1,6 @@
 package com.side_project.daily_assistant.adapter.in.board;
 
-import com.side_project.daily_assistant.application.port.in.board.CreatePostUseCase;
-import com.side_project.daily_assistant.application.port.in.board.GetPostUseCase;
-import com.side_project.daily_assistant.application.port.in.board.GetPostListUseCase;
+import com.side_project.daily_assistant.application.port.in.board.*;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +15,8 @@ public class PostController {
     private final CreatePostUseCase createPostUseCase;
     private final GetPostUseCase getPostUseCase;
     private final GetPostListUseCase getPostListUseCase;
+//    private final PatchPostUseCase patchPostUseCase;
+    private final DeletePostUseCase deletePostUseCase;
 
     //    public ResponseDto<List<PostMainResDto>> getPosts(@RequestParam("postType") String postType, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 //        return ResponseDto.success(postService.getPosts(postType, userDetails.getAccount()));
@@ -38,6 +38,18 @@ public class PostController {
     @PostMapping("/posts")
     public void createPost(@RequestBody CreatePostReq createPost) {
         createPostUseCase.createPost(createPost);
+    }
+
+//    // 게시글 수정
+//    @PatchMapping("/posts/{postId}")
+//    public void patchPost(@PathVariable Long postId) {
+//        patchPostUseCase.patchPost(postId);
+//    }
+
+    // 게시글 삭제
+    @DeleteMapping("/posts/{postId}")
+    public void deletePost(@PathVariable Long postId) {
+        deletePostUseCase.deletePost(postId);
     }
 
 }

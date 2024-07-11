@@ -26,6 +26,7 @@ public class DeletePostPersistenceAdapter implements DeletePostPort {
         Post post = postMapper.toDomain(postEntity);
         post.deleted(isDeleted.Y);
 
-        postMapper.toEntity(post);
+        PostEntity updatedPostEntity = postMapper.toEntity(post);
+        postRepository.save(updatedPostEntity);
     }
 }
