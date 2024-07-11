@@ -1,5 +1,6 @@
 package com.side_project.daily_assistant.adapter.out.board;
 
+import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import com.side_project.daily_assistant.application.port.out.board.GetPostListPort;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class GetPostListPersistenceAdapter implements GetPostListPort {
 
     @Override
     public List<GetPostRes> getPostList() {
-        List<PostEntity> postList = postRepository.findAll();
+        List<PostEntity> postList = postRepository.findAllByIsDeleted(isDeleted.N);
         return postMapper.toListGetPostRes(postList);
     }
 }

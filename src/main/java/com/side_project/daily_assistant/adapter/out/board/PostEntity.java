@@ -19,7 +19,8 @@ public class PostEntity extends BaseEntity {
     @Column(name = "post_id")
     private Long id;
 
-    private String board_category;
+    @Column(name = "board_category")
+    private String boardCategory;
 
     private String userId;
 
@@ -29,12 +30,16 @@ public class PostEntity extends BaseEntity {
 
     private String image;
 
-    private String post_category;
+    @Column(name = "post_category")
+    private String postCategory;
 
-    private Long view_count;
+    @Column(name = "view_count")
+    private Long viewCount;
 
-    private Long likes_count;
+    @Column(name = "likes_count")
+    private Long likesCount;
 
+    @Column(name = "is_deleted")
     @Enumerated(EnumType.STRING)
-    private isDeleted is_deleted;
+    private isDeleted isDeleted;
 }
