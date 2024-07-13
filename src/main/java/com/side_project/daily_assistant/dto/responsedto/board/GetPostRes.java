@@ -7,9 +7,10 @@ public record GetPostRes(
         String title,
         String content,
         String image,
-        String category,
+        String boardCategory,
+        String postCategory,
         String userId,
         LocalDateTime createdDateTime,
-        Long view_count,
-        Long likes_count
+        Long viewCount,
+        Long likesCount
 ) { }
