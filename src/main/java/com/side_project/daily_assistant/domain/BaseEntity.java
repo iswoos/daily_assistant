@@ -1,5 +1,6 @@
 package com.side_project.daily_assistant.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -31,6 +32,7 @@ AuditingEntityListener는 Spring Data JPA에서 제공하는 클래스 중 하�
 public abstract class BaseEntity {
 
     @CreatedDate
+    @Column(name = "created_date_time", updatable = false)
     private LocalDateTime createdDateTime;
 
     @LastModifiedDate

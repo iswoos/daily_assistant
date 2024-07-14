@@ -2,6 +2,7 @@ package com.side_project.daily_assistant.adapter.in.board;
 
 import com.side_project.daily_assistant.application.port.in.board.*;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
+import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class PostController {
     private final CreatePostUseCase createPostUseCase;
     private final GetPostUseCase getPostUseCase;
     private final GetPostListUseCase getPostListUseCase;
-//    private final PatchPostUseCase patchPostUseCase;
+    private final PatchPostUseCase patchPostUseCase;
     private final DeletePostUseCase deletePostUseCase;
 
     //    public ResponseDto<List<PostMainResDto>> getPosts(@RequestParam("postType") String postType, @AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -40,11 +41,11 @@ public class PostController {
         createPostUseCase.createPost(createPost);
     }
 
-//    // 게시글 수정
-//    @PatchMapping("/posts/{postId}")
-//    public void patchPost(@PathVariable Long postId) {
-//        patchPostUseCase.patchPost(postId);
-//    }
+    // 게시글 수정
+    @PatchMapping("/posts/{postId}")
+    public void patchPost(@PathVariable Long postId, @RequestBody ModifyPostReq modifyPost) {
+        patchPostUseCase.patchPost(postId, modifyPost);
+    }
 
     // 게시글 삭제
     @DeleteMapping("/posts/{postId}")

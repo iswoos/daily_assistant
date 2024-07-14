@@ -1,9 +1,12 @@
 package com.side_project.daily_assistant.domain.board;
 
 import com.side_project.daily_assistant.adapter.out.common.isDeleted;
+import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,24 +21,37 @@ public class Post {
 
     private String content;
 
-    private String board_category;
+    private String boardCategory;
 
     private String image;
 
-    private String post_category;
+    private String postCategory;
 
-    private Long view_count;
+    private Long viewCount;
 
-    private Long likes_count;
+    private Long likesCount;
+
+    private LocalDateTime createdDateTime;
 
     @Enumerated(EnumType.STRING)
-    private isDeleted is_deleted;
+    private isDeleted isDeleted;
 
     public void deleted(isDeleted is_deleted) {
         setDeleted(is_deleted);
     }
 
-    private void setDeleted(isDeleted is_deleted) {
-        this.is_deleted = is_deleted;
+    private void setDeleted(isDeleted isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public void updatedPostInfo(ModifyPostReq modifyPostReq) {
+        setPostInfo(modifyPostReq);
+    }
+
+    private void setPostInfo(ModifyPostReq modifyPostReq) {
+        this.title = modifyPostReq.title();
+        this.content = modifyPostReq.content();
+        this.image = modifyPostReq.image();
+        this.postCategory = modifyPostReq.postCategory();
     }
 }
