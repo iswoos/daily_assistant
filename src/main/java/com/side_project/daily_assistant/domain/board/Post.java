@@ -52,6 +52,14 @@ public class Post {
         this.viewCount++;
     }
 
+    public void likesCountUp() {
+        setLikesCountUP();
+    }
+
+    private void setLikesCountUP() {
+        this.likesCount++;
+    }
+
     public void updatedPostInfo(ModifyPostReq modifyPostReq) {
         setPostInfo(modifyPostReq);
     }

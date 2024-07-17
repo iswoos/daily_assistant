@@ -18,6 +18,7 @@ public class PostController {
     private final GetPostListUseCase getPostListUseCase;
     private final PatchPostUseCase patchPostUseCase;
     private final DeletePostUseCase deletePostUseCase;
+    private final LikePostUseCase likePostUseCase;
 
     //    public ResponseDto<List<PostMainResDto>> getPosts(@RequestParam("postType") String postType, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 //        return ResponseDto.success(postService.getPosts(postType, userDetails.getAccount()));
@@ -51,6 +52,12 @@ public class PostController {
     @DeleteMapping("/posts/{postId}")
     public void deletePost(@PathVariable Long postId) {
         deletePostUseCase.deletePost(postId);
+    }
+
+    // 게시글 추천
+    @PatchMapping("/posts/{postId}/likes")
+    public void likePost(@PathVariable Long postId) {
+        likePostUseCase.likePost(postId);
     }
 
 }
