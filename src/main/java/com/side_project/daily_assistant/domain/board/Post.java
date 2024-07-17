@@ -44,6 +44,14 @@ public class Post {
         this.isDeleted = isDeleted;
     }
 
+    public void viewCountUp() {
+        setViewCountUP();
+    }
+
+    private void setViewCountUP() {
+        this.viewCount++;
+    }
+
     public void updatedPostInfo(ModifyPostReq modifyPostReq) {
         setPostInfo(modifyPostReq);
     }
