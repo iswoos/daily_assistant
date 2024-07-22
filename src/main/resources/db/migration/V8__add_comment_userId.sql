@@ -1,0 +1,2 @@
+ALTER TABLE comment
+    ADD COLUMN userId VARCHAR(255);

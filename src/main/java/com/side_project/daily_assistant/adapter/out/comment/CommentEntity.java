@@ -35,6 +35,8 @@ public class CommentEntity {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> replies = new ArrayList<>();
 
+    private String userId;
+
     private String content;
 
     @Enumerated(EnumType.STRING)
