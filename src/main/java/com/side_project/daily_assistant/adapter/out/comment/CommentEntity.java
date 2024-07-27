@@ -28,13 +28,14 @@ public class CommentEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private PostEntity post;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private CommentEntity parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> replies = new ArrayList<>();
 
+    @Column(name = "user_id")
     private String userId;
 
     private String content;

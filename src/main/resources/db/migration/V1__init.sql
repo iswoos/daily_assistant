@@ -19,3 +19,14 @@ CREATE TABLE `post` (
                         `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                         PRIMARY KEY (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE comment (
+                         comment_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                         post_id BIGINT,
+                         parent_id BIGINT,
+                         `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                         content VARCHAR(255) NOT NULL,
+
+                         CONSTRAINT FK_post FOREIGN KEY (post_id) REFERENCES post(post_id) ON DELETE CASCADE,
+                         CONSTRAINT FK_parent FOREIGN KEY (parent_id) REFERENCES comment(comment_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
