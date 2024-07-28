@@ -32,7 +32,7 @@ AuditingEntityListener는 Spring Data JPA에서 제공하는 클래스 중 하�
 public abstract class BaseEntity {
 
     @CreatedDate
-    @Column(name = "created_date_time", updatable = false)
+    @Column(updatable = false)
     private LocalDateTime createdDateTime;
 
     @LastModifiedDate

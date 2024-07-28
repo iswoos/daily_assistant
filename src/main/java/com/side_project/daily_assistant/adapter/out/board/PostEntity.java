@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -42,4 +44,8 @@ public class PostEntity extends BaseEntity {
     @Column(name = "is_deleted")
     @Enumerated(EnumType.STRING)
     private isDeleted isDeleted;
+
+    private LocalDateTime createdDateTime;
+
+    private LocalDateTime modifiedDateTime;
 }

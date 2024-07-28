@@ -21,6 +21,8 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE comment (
+                         `created_date_time` datetime(6) DEFAULT NULL,
+                         `modified_date_time` datetime(6) DEFAULT NULL,
                          comment_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                          post_id BIGINT,
                          parent_id BIGINT,
