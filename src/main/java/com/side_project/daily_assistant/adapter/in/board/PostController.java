@@ -1,6 +1,7 @@
 package com.side_project.daily_assistant.adapter.in.board;
 
 import com.side_project.daily_assistant.application.port.in.board.*;
+import com.side_project.daily_assistant.dto.global.response.ApiResponse;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
@@ -32,8 +33,8 @@ public class PostController {
 
     // 게시글 단건조회
     @GetMapping("/posts/{postId}")
-    public GetPostRes getPost(@PathVariable Long postId) {
-        return getPostUseCase.getPost(postId);
+    public ApiResponse<GetPostRes> getPost(@PathVariable Long postId) {
+        return ApiResponse.ok(getPostUseCase.getPost(postId));
     }
 
     // 게시글 등록
