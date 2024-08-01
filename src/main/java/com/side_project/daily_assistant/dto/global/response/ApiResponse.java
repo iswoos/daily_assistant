@@ -1,6 +1,7 @@
 package com.side_project.daily_assistant.dto.global.response;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 public record ApiResponse<T>(
         int code,
@@ -18,5 +19,9 @@ public record ApiResponse<T>(
 
     public static <T> ApiResponse<T> of(HttpStatus httpStatus, String message, T data) {
         return new ApiResponse<>(httpStatus.value(), httpStatus, message, data);
+    }
+
+    public static <T> ResponseEntity<ApiResponse<T>> toResponseEntity(ApiResponse<T> apiResponse) {
+        return new ResponseEntity(apiResponse, apiResponse.httpStatus);
     }
 }

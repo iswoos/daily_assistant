@@ -15,7 +15,7 @@ public class CreatePostService implements CreatePostUseCase {
     private final CreatePostPort createPostPort;
 
     @Override
-    public void createPost(CreatePostReq createPost) {
-        createPostPort.createPost(createPost);
+    public String createPost(CreatePostReq createPost) {
+        return createPostPort.createPost(createPost);
     }
 }
