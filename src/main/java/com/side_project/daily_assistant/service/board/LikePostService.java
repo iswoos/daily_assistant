@@ -12,8 +12,7 @@ public class LikePostService implements LikePostUseCase {
     private final LikePostPort likePostPort;
 
     @Override
-    public void likePost(Long id) {
-        likePostPort.likePost(id);
-
+    public String likePost(Long id) {
+        return likePostPort.likePost(id);
     }
 }

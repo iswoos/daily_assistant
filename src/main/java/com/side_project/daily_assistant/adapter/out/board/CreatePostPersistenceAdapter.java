@@ -15,6 +15,7 @@ public class CreatePostPersistenceAdapter implements CreatePostPort {
     @Override
     public String createPost(CreatePostReq createPost) {
         PostEntity postEntity = postMapper.toEntity(createPost);
+        System.out.println(postEntity);
         postRepository.save(postEntity);
         return "게시글이 등록되었습니다";
     }

@@ -13,7 +13,7 @@ public class PatchPostService implements PatchPostUseCase {
     private final PatchPostPort patchPostPort;
 
     @Override
-    public void patchPost(Long id, ModifyPostReq modifyPostReq) {
-        patchPostPort.patchPost(id, modifyPostReq);
+    public String patchPost(Long id, ModifyPostReq modifyPostReq) {
+        return patchPostPort.patchPost(id, modifyPostReq);
     }
 }

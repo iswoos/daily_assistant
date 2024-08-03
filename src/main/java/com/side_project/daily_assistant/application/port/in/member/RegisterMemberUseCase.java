@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface RegisterMemberUseCase {
-    void registerMember(RegisterMemberReq registerMember);
+    String registerMember(RegisterMemberReq registerMember);
 }

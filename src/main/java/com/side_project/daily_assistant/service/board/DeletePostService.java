@@ -12,7 +12,7 @@ public class DeletePostService implements DeletePostUseCase {
     private final DeletePostPort deletePostPort;
 
     @Override
-    public void deletePost(Long id) {
-        deletePostPort.deletePost(id);
+    public String deletePost(Long id) {
+        return deletePostPort.deletePost(id);
     }
 }

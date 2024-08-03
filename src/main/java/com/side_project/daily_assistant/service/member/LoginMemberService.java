@@ -15,7 +15,7 @@ public class LoginMemberService implements LoginMemberUseCase {
     private final LoginMemberPort loginMemberPort;
 
     @Override
-    public void loginMember(LoginMemberReq loginMember) {
-        loginMemberPort.loginMember(loginMember);
+    public String loginMember(LoginMemberReq loginMember) {
+        return loginMemberPort.loginMember(loginMember);
     }
 }

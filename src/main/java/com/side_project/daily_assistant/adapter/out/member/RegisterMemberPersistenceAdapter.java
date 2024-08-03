@@ -14,8 +14,9 @@ public class RegisterMemberPersistenceAdapter implements RegisterMemberPort {
 
 
     @Override
-    public void registerMember(RegisterMemberReq registerMember) {
+    public String registerMember(RegisterMemberReq registerMember) {
         MemberEntity memberEntity = memberMapper.toEntity(registerMember);
         memberRepository.save(memberEntity);
+        return "계정 등록에 성공하였습니다";
     }
 }

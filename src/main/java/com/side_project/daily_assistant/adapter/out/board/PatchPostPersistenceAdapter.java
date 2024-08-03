@@ -3,6 +3,8 @@ package com.side_project.daily_assistant.adapter.out.board;
 import com.side_project.daily_assistant.application.port.out.board.PatchPostPort;
 import com.side_project.daily_assistant.domain.board.Post;
 import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
+import com.side_project.daily_assistant.exception.CustomException;
+import com.side_project.daily_assistant.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.stereotype.Service;
@@ -18,13 +20,14 @@ public class PatchPostPersistenceAdapter implements PatchPostPort {
     private final PostMapper postMapper;
 
     @Override
-    public void patchPost(Long id, ModifyPostReq modifyPostReq) {
+    public String patchPost(Long id, ModifyPostReq modifyPostReq) {
         PostEntity postEntity = postRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
+                () -> new CustomException(ErrorCode.POST_NOT_FOUND)
         );
         Post post = postMapper.toDomain(postEntity);
         post.updatedPostInfo(modifyPostReq);
         postEntity = postMapper.toEntity(post);
         postRepository.save(postEntity);
+        return "게시글이 수정되었습니다";
     }
 }

@@ -15,8 +15,8 @@ public class RegisterMemberService implements RegisterMemberUseCase {
     private final RegisterMemberPort registerMemberPort;
 
     @Override
-    public void registerMember(RegisterMemberReq registerMember) {
-        registerMemberPort.registerMember(registerMember);
+    public String registerMember(RegisterMemberReq registerMember) {
+        return registerMemberPort.registerMember(registerMember);
     }
 
     //    private final MemberRepository memberRepository;

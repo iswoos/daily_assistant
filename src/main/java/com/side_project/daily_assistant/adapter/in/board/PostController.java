@@ -31,8 +31,9 @@ public class PostController {
 
     // 게시글 단건조회
     @GetMapping("/posts/{postId}")
-    public ApiResponse<GetPostRes> getPost(@PathVariable Long postId) {
-        return ApiResponse.ok(getPostUseCase.getPost(postId));
+    public ResponseEntity<ApiResponse<GetPostRes>> getPost(@PathVariable Long postId) {
+        ApiResponse<GetPostRes> response = ApiResponse.ok(getPostUseCase.getPost(postId));
+        return ApiResponse.toResponseEntity(response);
     }
 
     // 게시글 등록
@@ -41,23 +42,26 @@ public class PostController {
         ApiResponse<String> response = ApiResponse.ok(createPostUseCase.createPost(createPost));
         return ApiResponse.toResponseEntity(response);
     }
-//
-//    // 게시글 수정
-//    @PatchMapping("/posts/{postId}")
-//    public ApiResponse<String> patchPost(@PathVariable Long postId, @RequestBody ModifyPostReq modifyPost) {
-//        ApiResponse.ok(patchPostUseCase.patchPost(postId, modifyPost));
-//    }
-//
-//    // 게시글 삭제
-//    @DeleteMapping("/posts/{postId}")
-//    public ApiResponse<String> deletePost(@PathVariable Long postId) {
-//        ApiResponse.ok(deletePostUseCase.deletePost(postId));
-//    }
-//
-//    // 게시글 추천
-//    @PatchMapping("/posts/{postId}/likes")
-//    public ApiResponse<String> likePost(@PathVariable Long postId) {
-//        ApiResponse.ok(likePostUseCase.likePost(postId));
-//    }
+
+    // 게시글 수정
+    @PatchMapping("/posts/{postId}")
+    public ResponseEntity<ApiResponse<String>> patchPost(@PathVariable Long postId, @RequestBody ModifyPostReq modifyPost) {
+        ApiResponse<String> response = ApiResponse.ok(patchPostUseCase.patchPost(postId, modifyPost));
+        return ApiResponse.toResponseEntity(response);
+    }
+
+    // 게시글 삭제
+    @DeleteMapping("/posts/{postId}")
+    public ResponseEntity<ApiResponse<String>> deletePost(@PathVariable Long postId) {
+        ApiResponse<String> response = ApiResponse.ok(deletePostUseCase.deletePost(postId));
+        return ApiResponse.toResponseEntity(response);
+    }
+
+    // 게시글 추천
+    @PatchMapping("/posts/{postId}/likes")
+    public ResponseEntity<ApiResponse<String>> likePost(@PathVariable Long postId) {
+        ApiResponse<String> response = ApiResponse.ok(likePostUseCase.likePost(postId));
+        return ApiResponse.toResponseEntity(response);
+    }
 
 }

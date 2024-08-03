@@ -18,7 +18,7 @@ public class DeletePostPersistenceAdapter implements DeletePostPort {
     private final PostMapper postMapper;
 
     @Override
-    public void deletePost(Long id) {
+    public String deletePost(Long id) {
         PostEntity postEntity = postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
         );
@@ -28,5 +28,6 @@ public class DeletePostPersistenceAdapter implements DeletePostPort {
 
         PostEntity updatedPostEntity = postMapper.toEntity(post);
         postRepository.save(updatedPostEntity);
+        return "게시글이 삭제되었습니다";
     }
 }
