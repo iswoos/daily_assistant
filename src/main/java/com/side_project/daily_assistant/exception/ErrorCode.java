@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
+    // 400 Bad Request 요청데이터 옳지않음
+    BAD_REQUEST_PARAMETER(400, HttpStatus.BAD_REQUEST, "옳지않은 파라미터입니다."),
+
     // 404 NOT_FOUND 존재하지 않음
     USER_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 사용자입니다."),
     POST_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 게시물입니다."),
