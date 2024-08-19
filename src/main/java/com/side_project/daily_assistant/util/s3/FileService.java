@@ -10,6 +10,7 @@ import com.side_project.daily_assistant.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import java.net.URL;
 import java.util.Date;
 import java.util.UUID;
@@ -27,7 +28,8 @@ public class FileService {
 
     /**
      * presigned url 발급
-     * @param prefix 버킷 디렉토리 이름
+     *
+     * @param prefix   버킷 디렉토리 이름
      * @param fileName 클라이언트가 전달한 파일명 파라미터
      * @return presigned url
      */
@@ -42,7 +44,8 @@ public class FileService {
 
     /**
      * 파일 업로드용(PUT) presigned url 생성
-     * @param bucket 버킷 이름
+     *
+     * @param bucket   버킷 이름
      * @param fileName S3 업로드용 파일 이름
      * @return presigned url
      */
@@ -61,6 +64,7 @@ public class FileService {
 
     /**
      * presigned url 유효 기간 설정
+     *
      * @return 유효기간
      */
     private Date getPreSignedUrlExpiration() {
@@ -73,6 +77,7 @@ public class FileService {
 
     /**
      * 파일 고유 ID를 생성
+     *
      * @return 36자리의 UUID
      */
     private String createFileId() {
@@ -81,6 +86,7 @@ public class FileService {
 
     /**
      * 파일의 전체 경로를 생성
+     *
      * @param prefix 디렉토리 경로
      * @return 파일의 전체 경로
      */
