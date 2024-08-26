@@ -36,6 +36,11 @@ public class PostController {
         return ApiResponse.toResponseEntity(response);
     }
 
+    /*
+    FE단에서 이미지 등록할 경우(여러개든 한개든 상관없음), 이미지 전용 테이블을 따로 파서 게시물이랑 1:N관계 맺자.
+    (기존 게시글 테이블의 Image_url에 이미지 여러개일 경우 , 으로 구분시켜놓으면 정규화도 안 맞고... 짜치니까)
+    */
+
     // 게시글 등록
     @PostMapping("/posts")
     public ResponseEntity<ApiResponse<String>> createPost(@RequestBody CreatePostReq createPost) {
