@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class GetPostPersistenceAdapter implements GetPostPort {
 
     private final PostRepository postRepository;
-    private final PostMapper postMapper;
 
     @Override
     public GetPostRes getPost(Long id) {
@@ -23,12 +22,11 @@ public class GetPostPersistenceAdapter implements GetPostPort {
                 () -> new CustomException(ErrorCode.POST_NOT_FOUND)
         );
 
-        Post post = postMapper.toDomain(postEntity);
+        Post post = Post.fromEntity(postEntity);
         post.viewCountUp();
+        PostEntity updatePostEntity = post.toEntity(post);
+        postRepository.save(updatePostEntity);
 
-        postEntity = postMapper.toEntity(post);
-        postRepository.save(postEntity);
-
-        return postMapper.toGetPostRes(postEntity);
+        return GetPostRes.fromEntity(updatePostEntity);
     }
 }

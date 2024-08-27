@@ -10,11 +10,10 @@ import org.springframework.stereotype.Service;
 public class CreatePostPersistenceAdapter implements CreatePostPort {
 
     private final PostRepository postRepository;
-    private final PostMapper postMapper;
 
     @Override
     public String createPost(CreatePostReq createPost) {
-        PostEntity postEntity = postMapper.toEntity(createPost);
+        PostEntity postEntity = PostEntity.create(createPost);
         postRepository.save(postEntity);
         return "게시글이 등록되었습니다";
     }
