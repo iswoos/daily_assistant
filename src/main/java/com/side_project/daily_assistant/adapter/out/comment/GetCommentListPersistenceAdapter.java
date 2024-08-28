@@ -13,12 +13,12 @@ import java.util.List;
 @Transactional
 public class GetCommentListPersistenceAdapter implements GetCommentListPort {
 
-    private final CommentMapper commentMapper;
     private final CommentRepository commentRepository;
 
     @Override
     public List<GetCommentRes> getCommentList(Long id) {
         List<CommentEntity> commentList = commentRepository.findAllByPostId(id);
-        return commentMapper.toListGetCommentRes(commentList);
+        return commentList.stream()
+                .map(GetCommentRes::)
     }
 }
