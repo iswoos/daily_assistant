@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 public class RegisterMemberPersistenceAdapter implements RegisterMemberPort {
 
     private final MemberRepository memberRepository;
-    private final MemberMapper memberMapper;
-
 
     @Override
     public String registerMember(RegisterMemberReq registerMember) {
-        MemberEntity memberEntity = memberMapper.toEntity(registerMember);
+        MemberEntity memberEntity = MemberEntity.create(registerMember);
         memberRepository.save(memberEntity);
         return "계정 등록에 성공하였습니다";
     }

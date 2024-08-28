@@ -17,17 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class PatchPostPersistenceAdapter implements PatchPostPort {
 
     private final PostRepository postRepository;
-    private final PostMapper postMapper;
 
     @Override
     public String patchPost(Long id, ModifyPostReq modifyPostReq) {
         PostEntity postEntity = postRepository.findById(id).orElseThrow(
                 () -> new CustomException(ErrorCode.POST_NOT_FOUND)
         );
-        Post post = postMapper.toDomain(postEntity);
+
+        Post post = Post.fromEntity(postEntity);
         post.updatedPostInfo(modifyPostReq);
-        postEntity = postMapper.toEntity(post);
-        postRepository.save(postEntity);
+        postRepository.save(post.toEntity(post));
         return "게시글이 수정되었습니다";
     }
 }

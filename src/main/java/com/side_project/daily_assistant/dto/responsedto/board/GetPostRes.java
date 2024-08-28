@@ -5,6 +5,7 @@ import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record GetPostRes(
         Long id,

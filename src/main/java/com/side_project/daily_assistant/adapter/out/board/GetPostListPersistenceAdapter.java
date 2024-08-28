@@ -7,17 +7,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class GetPostListPersistenceAdapter implements GetPostListPort {
 
-    private final PostMapper postMapper;
     private final PostRepository postRepository;
 
     @Override
     public List<GetPostRes> getPostList() {
-        List<PostEntity> postList = postRepository.findAllByIsDeleted(isDeleted.N);
-        return postMapper.toListGetPostRes(postList);
+        List<PostEntity> postEntityList = postRepository.findAllByIsDeleted(isDeleted.N);
+        return postEntityList.stream()
+                .map(GetPostRes::fromEntity)
+                .collect(Collectors.toList());
     }
 }

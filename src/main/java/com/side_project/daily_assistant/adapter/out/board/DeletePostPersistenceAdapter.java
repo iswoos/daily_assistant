@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeletePostPersistenceAdapter implements DeletePostPort {
 
     private final PostRepository postRepository;
-    private final PostMapper postMapper;
 
     @Override
     public String deletePost(Long id) {
@@ -23,11 +22,9 @@ public class DeletePostPersistenceAdapter implements DeletePostPort {
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
         );
 
-        Post post = postMapper.toDomain(postEntity);
+        Post post = Post.fromEntity(postEntity);
         post.deleted(isDeleted.Y);
-
-        PostEntity updatedPostEntity = postMapper.toEntity(post);
-        postRepository.save(updatedPostEntity);
+        postRepository.save(post.toEntity(post));
         return "게시글이 삭제되었습니다";
     }
 }

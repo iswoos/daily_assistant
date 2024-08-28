@@ -84,6 +84,7 @@ public class PostEntity extends BaseEntity {
                 .image(createPostReq.image())
                 .postCategory(createPostReq.postCategory())
                 .createdDateTime(LocalDateTime.now())
+                .modifiedDateTime(LocalDateTime.now())
                 .build();
     }
 }

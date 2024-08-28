@@ -98,7 +98,7 @@ public class Post {
                 .likesCount(post.getLikesCount())
                 .isDeleted(post.getIsDeleted())
                 .createdDateTime(post.getCreatedDateTime())
-                .modifiedDateTime(post.getModifiedDateTime())
+                .modifiedDateTime(LocalDateTime.now())
                 .build();
     }
 

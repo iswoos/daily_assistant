@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @DynamicUpdate
 public class LikePostPersistenceAdapter implements LikePostPort {
 
-    private final PostMapper postMapper;
     private final PostRepository postRepository;
 
     @Override
@@ -24,9 +23,9 @@ public class LikePostPersistenceAdapter implements LikePostPort {
                 () -> new CustomException(ErrorCode.POST_NOT_FOUND)
         );
 
-        Post post = postMapper.toDomain(postEntity);
+        Post post = Post.fromEntity(postEntity);
         post.likesCountUp();
-        postRepository.save(postMapper.toEntity(post));
+        postRepository.save(post.toEntity(post));
         return "게시글이 추천이 완료되었습니다";
     }
 }
