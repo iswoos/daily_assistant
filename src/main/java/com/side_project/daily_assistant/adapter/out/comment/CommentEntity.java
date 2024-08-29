@@ -2,12 +2,12 @@ package com.side_project.daily_assistant.adapter.out.comment;
 
 import com.side_project.daily_assistant.adapter.out.board.PostEntity;
 import com.side_project.daily_assistant.adapter.out.common.isDeleted;
+import com.side_project.daily_assistant.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Table(name = "comment")
-public class CommentEntity {
+public class CommentEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +43,4 @@ public class CommentEntity {
 
     @Enumerated(EnumType.STRING)
     private isDeleted is_deleted;
-
-    private LocalDateTime createdDateTime;
-
-    private LocalDateTime modifiedDateTime;
 }

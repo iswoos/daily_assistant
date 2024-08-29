@@ -31,13 +31,13 @@ public class CommentController {
 //    }
 //
 //    // 댓글 삭제
-//    @DeleteMapping("/comments")
+//    @DeleteMapping("/comments/{commentId}")
 //    public  createComments(@RequestBody ) {
 //
 //    }
 //
 //    // 댓글 수정
-//    @PatchMapping("/comments")
+//    @PatchMapping("/comments/{commentId}")
 //    public  createComments(@RequestBody ) {
 //
 //    }

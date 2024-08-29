@@ -44,9 +44,6 @@ public class PostEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private isDeleted isDeleted;
 
-    private LocalDateTime createdDateTime;
-
-    private LocalDateTime modifiedDateTime;
 
     @Builder
     private PostEntity(

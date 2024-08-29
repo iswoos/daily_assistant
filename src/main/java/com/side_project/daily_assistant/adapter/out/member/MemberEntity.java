@@ -1,19 +1,18 @@
 package com.side_project.daily_assistant.adapter.out.member;
 
-import com.side_project.daily_assistant.adapter.out.board.PostEntity;
-import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import com.side_project.daily_assistant.domain.BaseEntity;
-import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.requestdto.member.RegisterMemberReq;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 @Table(name = "member")
 public class MemberEntity extends BaseEntity {
 
@@ -29,10 +28,6 @@ public class MemberEntity extends BaseEntity {
     private Double latitude;
 
     private Double longitude;
-
-    private LocalDateTime createdDateTime;
-
-    private LocalDateTime modifiedDateTime;
 
     @Builder
     private MemberEntity(
