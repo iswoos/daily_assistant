@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,4 +43,8 @@ public class CommentEntity {
 
     @Enumerated(EnumType.STRING)
     private isDeleted is_deleted;
+
+    private LocalDateTime createdDateTime;
+
+    private LocalDateTime modifiedDateTime;
 }

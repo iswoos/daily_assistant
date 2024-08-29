@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class GetCommentListPersistenceAdapter implements GetCommentListPort {
     public List<GetCommentRes> getCommentList(Long id) {
         List<CommentEntity> commentList = commentRepository.findAllByPostId(id);
         return commentList.stream()
-                .map(GetCommentRes::)
+                .map(GetCommentRes::fromEntity)
+                .collect(Collectors.toList());
     }
 }
