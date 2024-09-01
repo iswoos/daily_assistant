@@ -1,17 +1,26 @@
 package com.side_project.daily_assistant.adapter.out.board;
+
+import com.side_project.daily_assistant.adapter.out.comment.CommentEntity;
 import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import com.side_project.daily_assistant.domain.BaseEntity;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
+@DynamicUpdate
 @Table(name = "post")
 public class PostEntity extends BaseEntity {
 
@@ -39,6 +48,9 @@ public class PostEntity extends BaseEntity {
 
     @Column(name = "likes_count")
     private Long likesCount;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
+    private List<CommentEntity> comments  = new ArrayList<>();
 
     @Column(name = "is_deleted")
     @Enumerated(EnumType.STRING)
