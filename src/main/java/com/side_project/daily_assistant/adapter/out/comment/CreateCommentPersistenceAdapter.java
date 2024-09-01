@@ -23,7 +23,7 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
         );
 
         CommentEntity parent = null;
-        if (createCommentReq.parentId() != (null)) {
+        if (createCommentReq.parentId() != null) {
             parent = commentRepository.findById(createCommentReq.parentId()).orElseThrow(
                     () -> new CustomException(ErrorCode.COMMENT_NOT_FOUND)
             );
