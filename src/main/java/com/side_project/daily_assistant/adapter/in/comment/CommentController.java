@@ -18,10 +18,6 @@ public class CommentController {
     private final GetCommentListUseCase getCommentListUseCase;
     private final CreateCommentUseCase createCommentUseCase;
 
-    bbbbb
-            nnnngit
-    bbbb
-
     // 댓글 조회
     @GetMapping("/comments/{postId}")
     public ResponseEntity<ApiResponse<List<GetCommentRes>>> getCommentList(@PathVariable Long postId) {
