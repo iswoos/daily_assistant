@@ -18,7 +18,6 @@ public class CommentController {
     private final GetCommentListUseCase getCommentListUseCase;
     private final CreateCommentUseCase createCommentUseCase;
     asdf
-    ffff
 
     // 댓글 조회
     @GetMapping("/comments/{postId}")
