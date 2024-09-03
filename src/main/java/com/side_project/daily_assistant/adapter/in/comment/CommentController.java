@@ -17,7 +17,7 @@ public class CommentController {
 
     private final GetCommentListUseCase getCommentListUseCase;
     private final CreateCommentUseCase createCommentUseCase;
-    asdf
+
     bbbbb
             nnnngit
     bbbb
