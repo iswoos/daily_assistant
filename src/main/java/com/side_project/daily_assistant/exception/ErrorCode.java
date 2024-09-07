@@ -11,6 +11,8 @@ public enum ErrorCode {
     // 400 Bad Request 요청데이터 옳지않음
     BAD_REQUEST_PARAMETER(400, HttpStatus.BAD_REQUEST, "옳지않은 파라미터입니다."),
     PARENT_COMMENT_MISMATCH(400, HttpStatus.BAD_REQUEST, "부모 댓글과 자식 댓글의 게시글 번호가 일치하지 않습니다."),
+    EXCEEDED_IMAGE_UPLOAD_MAX_COUNT(400, HttpStatus.BAD_REQUEST, "이미지 최대 등록 허용 개수를 초과하였습니다."),
+    EXCEEDED_MAX_TOTAL_IMAGE_SIZE(400, HttpStatus.BAD_REQUEST, "이미지 최대 등록 허용 용량을 초과하였습니다."),
 
     // 404 NOT_FOUND 존재하지 않음
     USER_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 사용자입니다."),

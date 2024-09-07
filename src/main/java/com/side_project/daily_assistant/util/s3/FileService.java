@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.UUID;
 
-import static com.side_project.daily_assistant.util.ValueCheck.isNullOrEmpty;
+import static com.side_project.daily_assistant.util.ValueCheck.valueNullOrEmpty;
 
 
 @Service
@@ -97,13 +97,13 @@ public class FileService {
     }
 
     private void prefixAndFileNameValidCheck(String prefix, String fileName) {
-        if (isNullOrEmpty(prefix) || isNullOrEmpty(fileName)) {
+        if (valueNullOrEmpty(prefix) || valueNullOrEmpty(fileName)) {
             new CustomException(ErrorCode.BAD_REQUEST_PARAMETER);
         }
     }
 
     private void bucketAndFileNameValidCheck(String bucket) {
-        if (isNullOrEmpty(bucket)) {
+        if (valueNullOrEmpty(bucket)) {
             new CustomException(ErrorCode.BAD_REQUEST_PARAMETER);
         }
     }
