@@ -8,6 +8,7 @@ import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -43,8 +44,11 @@ public class PostController {
 
     // 게시글 등록
     @PostMapping("/posts")
-    public ResponseEntity<ApiResponse<String>> createPost(@RequestBody CreatePostReq createPost) {
-        ApiResponse<String> response = ApiResponse.ok(createPostUseCase.createPost(createPost));
+    public ResponseEntity<ApiResponse<String>> createPost(
+            @RequestPart("post") CreatePostReq createPost,
+            @RequestPart(value = "images", required = false) List<MultipartFile> images
+    ) {
+        ApiResponse<String> response = ApiResponse.ok(createPostUseCase.createPost(createPost, images));
         return ApiResponse.toResponseEntity(response);
     }
 
