@@ -19,6 +19,7 @@ public class CreatePostService implements CreatePostUseCase {
 
     @Override
     public String createPost(CreatePostReq createPost, List<MultipartFile> images) {
-        return createPostPort.createPost(createPost);
+
+        return createPostPort.createPost(createPost, images);
     }
 }

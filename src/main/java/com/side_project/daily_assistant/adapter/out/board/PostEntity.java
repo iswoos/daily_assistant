@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -85,12 +86,12 @@ public class PostEntity extends BaseEntity {
         this.modifiedDateTime = modifiedDateTime;
     }
 
-    public static PostEntity create(CreatePostReq createPostReq) {
+    public static PostEntity create(CreatePostReq createPostReq, List<MultipartFile> images) {
         return PostEntity.builder()
                 .userId(createPostReq.userId())
                 .title(createPostReq.title())
                 .content(createPostReq.content())
-                .image(createPostReq.image())
+//                .image(images.image())
                 .postCategory(createPostReq.postCategory())
                 .createdDateTime(LocalDateTime.now())
                 .modifiedDateTime(LocalDateTime.now())
