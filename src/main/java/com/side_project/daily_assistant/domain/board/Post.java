@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,7 +26,9 @@ public class Post {
 
     private String boardCategory;
 
-    private String image;
+    private String imageFolderUUID;
+
+    private List<String> imageUrls;
 
     private String postCategory;
 
@@ -47,7 +50,8 @@ public class Post {
             String userId,
             String title,
             String content,
-            String image,
+            String imageFolderUUID,
+            List<String> imageUrls,
             String postCategory,
             Long viewCount,
             Long likesCount,
@@ -59,7 +63,8 @@ public class Post {
         this.userId = userId;
         this.title = title;
         this.content = content;
-        this.image = image;
+        this.imageFolderUUID = imageFolderUUID;
+        this.imageUrls = imageUrls;
         this.postCategory = postCategory;
         this.viewCount = viewCount;
         this.likesCount = likesCount;
@@ -75,7 +80,8 @@ public class Post {
                 .userId(postEntity.getUserId())
                 .title(postEntity.getTitle())
                 .content(postEntity.getContent())
-                .image(postEntity.getImage())
+                .imageFolderUUID(postEntity.getImageFolderUUID())
+                .imageUrls(postEntity.getImageUrls())
                 .postCategory(postEntity.getPostCategory())
                 .viewCount(postEntity.getViewCount())
                 .likesCount(postEntity.getLikesCount())
@@ -92,7 +98,8 @@ public class Post {
                 .userId(post.getUserId())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .image(post.getImage())
+                .imageFolderUUID(post.getImageFolderUUID())
+                .imageUrls(post.getImageUrls())
                 .postCategory(post.getPostCategory())
                 .viewCount(post.getViewCount())
                 .likesCount(post.getLikesCount())
@@ -133,7 +140,7 @@ public class Post {
     private void setPostInfo(ModifyPostReq modifyPostReq) {
         this.title = modifyPostReq.title();
         this.content = modifyPostReq.content();
-        this.image = modifyPostReq.image();
+        this.imageUrls = modifyPostReq.imageUrls();
         this.postCategory = modifyPostReq.postCategory();
     }
 }

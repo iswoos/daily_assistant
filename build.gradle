@@ -31,10 +31,10 @@ dependencies {
 	// mysql
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
-	// Map Struct
-	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+//	// Map Struct
+//	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+//	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+//	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
 //	//spring AI
 //	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
@@ -53,9 +53,9 @@ dependencies {
 	// S3
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
-	// flyway
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.flywaydb:flyway-mysql'
+//	// flyway
+//	implementation 'org.flywaydb:flyway-core'
+//	implementation 'org.flywaydb:flyway-mysql'
 
 	// devtools
 	compileOnly("org.springframework.boot:spring-boot-devtools")

@@ -15,8 +15,8 @@ public class CreatePostPersistenceAdapter implements CreatePostPort {
     private final PostRepository postRepository;
 
     @Override
-    public String createPost(CreatePostReq createPost, List<MultipartFile> images) {
-        PostEntity postEntity = PostEntity.create(createPost, images);
+    public String createPost(CreatePostReq createPost, String imageFolderUUID, List<String> preSignedUrls) {
+        PostEntity postEntity = PostEntity.create(createPost, imageFolderUUID, preSignedUrls);
         postRepository.save(postEntity);
         return "게시글이 등록되었습니다";
     }
