@@ -1,7 +1,9 @@
 package com.side_project.daily_assistant.adapter.out.board;
 
 import com.side_project.daily_assistant.application.port.out.board.CreatePostPort;
+import com.side_project.daily_assistant.domain.board.Post;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
+import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,9 +17,9 @@ public class CreatePostPersistenceAdapter implements CreatePostPort {
     private final PostRepository postRepository;
 
     @Override
-    public String createPost(CreatePostReq createPost, String imageFolderUUID, List<String> preSignedUrls) {
-        PostEntity postEntity = PostEntity.create(createPost, imageFolderUUID, preSignedUrls);
+    public GetPostRes createPost(CreatePostReq createPost, String imageFolderUUID, List<String> prePutSignedUrls, List<String> getImageUrls) {
+        PostEntity postEntity = PostEntity.create(createPost, imageFolderUUID, getImageUrls);
         postRepository.save(postEntity);
-        return "게시글이 등록되었습니다";
+        return GetPostRes.fromEntity(postEntity, prePutSignedUrls);
     }
 }

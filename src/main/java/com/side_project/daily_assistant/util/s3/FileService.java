@@ -27,17 +27,31 @@ public class FileService {
     private final AmazonS3 amazonS3;
 
     /**
+     * 파일의 URL을 반환
+     *
+     * @param prefix   버킷 디렉토리 이름
+     * @param fileName 클라이언트가 전달한 파일명 파라미터
+     * @return 파일의 URL
+     */
+    public String getFileUrl(String prefix, String fileName) {
+        prefixAndFileNameValidCheck(prefix, fileName);
+
+        fileName = createPath(prefix, fileName);
+        return amazonS3.getUrl(bucket, fileName).toString();
+    }
+
+    /**
      * presigned url 발급
      *
      * @param prefix   버킷 디렉토리 이름
      * @param fileName 클라이언트가 전달한 파일명 파라미터
      * @return presigned url
      */
-    public String getPreSignedUrl(String prefix, String fileName) {
+    public String getPutPreSignedUrl(String prefix, String fileName) {
         prefixAndFileNameValidCheck(prefix, fileName);
 
         fileName = createPath(prefix, fileName);
-        GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePreSignedUrlRequest(bucket, fileName);
+        GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePutPreSignedUrlRequest(bucket, fileName);
         URL url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);
         return url.toString();
     }
@@ -49,7 +63,7 @@ public class FileService {
      * @param fileName S3 업로드용 파일 이름
      * @return presigned url
      */
-    private GeneratePresignedUrlRequest getGeneratePreSignedUrlRequest(String bucket, String fileName) {
+    private GeneratePresignedUrlRequest getGeneratePutPreSignedUrlRequest(String bucket, String fileName) {
         bucketAndFileNameValidCheck(bucket);
 
         GeneratePresignedUrlRequest generatePresignedUrlRequest =
@@ -70,7 +84,7 @@ public class FileService {
     private Date getPreSignedUrlExpiration() {
         Date expiration = new Date();
         long expTimeMillis = expiration.getTime();
-        expTimeMillis += 1000 * 60 * 2;
+        expTimeMillis += 1000 * 60 * 2; //2분
         expiration.setTime(expTimeMillis);
         return expiration;
     }
@@ -91,9 +105,7 @@ public class FileService {
      * @return 파일의 전체 경로
      */
     private String createPath(String prefix, String fileName) {
-
-        String fileId = createFileId();
-        return String.format("%s/%s", prefix, fileId + fileName);
+        return String.format("%s/%s", prefix, fileName);
     }
 
     private void prefixAndFileNameValidCheck(String prefix, String fileName) {

@@ -11,7 +11,8 @@ public record GetPostRes(
         Long id,
         String title,
         String content,
-        String image,
+        String imageFolderUUID,
+        List<String> imageUrls,
         String boardCategory,
         String postCategory,
         String userId,
@@ -24,7 +25,8 @@ public record GetPostRes(
             Long id,
             String title,
             String content,
-            String image,
+            String imageFolderUUID,
+            List<String> imageUrls,
             String boardCategory,
             String postCategory,
             String userId,
@@ -34,7 +36,8 @@ public record GetPostRes(
         this.id = id;
         this.title = title;
         this.content = content;
-        this.image = image;
+        this.imageFolderUUID = imageFolderUUID;
+        this.imageUrls = imageUrls;
         this.boardCategory = boardCategory;
         this.postCategory = postCategory;
         this.userId = userId;
@@ -48,7 +51,24 @@ public record GetPostRes(
                 .id(postEntity.getId())
                 .title(postEntity.getTitle())
                 .content(postEntity.getContent())
-                .image(postEntity.getImage())
+                .imageFolderUUID(postEntity.getImageFolderUUID())
+                .imageUrls(postEntity.getImageUrls())
+                .boardCategory(postEntity.getBoardCategory())
+                .postCategory(postEntity.getPostCategory())
+                .userId(postEntity.getUserId())
+                .createdDateTime(postEntity.getCreatedDateTime())
+                .viewCount(postEntity.getViewCount())
+                .likesCount(postEntity.getLikesCount())
+                .build();
+    }
+
+    public static GetPostRes fromEntity(PostEntity postEntity, List<String> prePutSignedUrls) {
+        return GetPostRes.builder()
+                .id(postEntity.getId())
+                .title(postEntity.getTitle())
+                .content(postEntity.getContent())
+                .imageFolderUUID(postEntity.getImageFolderUUID())
+                .imageUrls(prePutSignedUrls)
                 .boardCategory(postEntity.getBoardCategory())
                 .postCategory(postEntity.getPostCategory())
                 .userId(postEntity.getUserId())

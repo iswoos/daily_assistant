@@ -3,6 +3,7 @@ package com.side_project.daily_assistant.adapter.in.board;
 import com.side_project.daily_assistant.application.port.in.board.CreatePostUseCase;
 import com.side_project.daily_assistant.dto.global.response.ApiResponse;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
+import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import com.side_project.daily_assistant.exception.CustomException;
 import com.side_project.daily_assistant.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -27,14 +28,14 @@ public class CreatePostController {
 
     // 게시글 등록
     @PostMapping("/posts")
-    public ResponseEntity<ApiResponse<String>> createPost(
+    public ResponseEntity<ApiResponse<GetPostRes>> createPost(
             @RequestPart("post") CreatePostReq createPost,
             @RequestPart(value = "images", required = false) List<MultipartFile> images
     ) {
         if(imageListNotNullOrNotEmpty(images)){
             validateImages(images);
         }
-        ApiResponse<String> response = ApiResponse.ok(createPostUseCase.createPost(createPost, images));
+        ApiResponse<GetPostRes> response = ApiResponse.ok(createPostUseCase.createPost(createPost, images));
         return ApiResponse.toResponseEntity(response);
     }
 

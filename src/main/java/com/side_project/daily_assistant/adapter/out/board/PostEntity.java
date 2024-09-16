@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public class PostEntity extends BaseEntity {
 
     private String imageFolderUUID;
 
-    @Lob
     @Convert(converter = StringListConverter.class)
     private List<String> imageUrls;
 

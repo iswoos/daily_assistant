@@ -3,6 +3,7 @@ package com.side_project.daily_assistant.service.board;
 import com.side_project.daily_assistant.application.port.in.board.CreatePostUseCase;
 import com.side_project.daily_assistant.application.port.out.board.CreatePostPort;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
+import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import com.side_project.daily_assistant.util.s3.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,20 @@ public class CreatePostService implements CreatePostUseCase {
     private final FileService fileService;
 
     @Override
-    public String createPost(CreatePostReq createPost, List<MultipartFile> images) {
+    public GetPostRes createPost(CreatePostReq createPost, List<MultipartFile> images) {
         String imageFolderUUID = UUID.randomUUID().toString();
-        List<String> preSignedUrls = new ArrayList<>();
+        List<String> prePutSignedUrls = new ArrayList<>();
+        List<String> getImageUrls = new ArrayList<>();
 
         for (MultipartFile image : images) {
             String fileName = image.getOriginalFilename();
-            String preSignedUrl = fileService.getPreSignedUrl("board-image/" + imageFolderUUID, fileName);
-            preSignedUrls.add(preSignedUrl);
+            String putPreSignedUrl = fileService.getPutPreSignedUrl("board-image/" + imageFolderUUID, fileName);
+            prePutSignedUrls.add(putPreSignedUrl);
+
+            String getImageUrl = fileService.getFileUrl("board-image/" + imageFolderUUID, fileName);
+            getImageUrls.add(getImageUrl);
         }
 
-        return createPostPort.createPost(createPost, imageFolderUUID, preSignedUrls);
+        return createPostPort.createPost(createPost, imageFolderUUID, prePutSignedUrls, getImageUrls);
     }
 }
