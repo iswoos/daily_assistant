@@ -7,6 +7,7 @@ import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -133,14 +134,14 @@ public class Post {
         this.likesCount++;
     }
 
-    public void updatedPostInfo(ModifyPostReq modifyPostReq) {
-        setPostInfo(modifyPostReq);
+    public void updatedPostInfo(ModifyPostReq modifyPostReq, List<String> images) {
+        setPostInfo(modifyPostReq, images);
     }
 
-    private void setPostInfo(ModifyPostReq modifyPostReq) {
+    private void setPostInfo(ModifyPostReq modifyPostReq, List<String> images) {
         this.title = modifyPostReq.title();
         this.content = modifyPostReq.content();
-        this.imageUrls = modifyPostReq.imageUrls();
+        this.imageUrls = images;
         this.postCategory = modifyPostReq.postCategory();
     }
 }

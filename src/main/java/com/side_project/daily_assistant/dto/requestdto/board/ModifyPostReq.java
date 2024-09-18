@@ -5,6 +5,5 @@ import java.util.List;
 public record ModifyPostReq(
         String title,
         String content,
-        List<String> imageUrls,
         String postCategory
 ) { }
