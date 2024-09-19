@@ -30,10 +30,13 @@ public class CreatePostService implements CreatePostUseCase {
 
         for (MultipartFile image : images) {
             String fileName = image.getOriginalFilename();
-            String putPreSignedUrl = fileService.getPutPreSignedUrl("board-image/" + imageFolderUUID, fileName);
+
+            String fullFilePath = fileService.createPath("board-image/" + imageFolderUUID, fileName);
+
+            String putPreSignedUrl = fileService.getPutPreSignedUrl(fullFilePath);
             prePutSignedUrls.add(putPreSignedUrl);
 
-            String getImageUrl = fileService.getFileUrl("board-image/" + imageFolderUUID, fileName);
+            String getImageUrl = fileService.getFileUrl(fullFilePath);
             getImageUrls.add(getImageUrl);
         }
 

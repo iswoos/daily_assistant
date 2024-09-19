@@ -29,29 +29,21 @@ public class FileService {
     /**
      * 파일의 URL을 반환
      *
-     * @param prefix   버킷 디렉토리 이름
-     * @param fileName 클라이언트가 전달한 파일명 파라미터
+     * @param fullFilePath   버킷 디렉토리 전체 경로
      * @return 파일의 URL
      */
-    public String getFileUrl(String prefix, String fileName) {
-        prefixAndFileNameValidCheck(prefix, fileName);
-
-        fileName = createPath(prefix, fileName);
-        return amazonS3.getUrl(bucket, fileName).toString();
+    public String getFileUrl(String fullFilePath) {
+        return amazonS3.getUrl(bucket, fullFilePath).toString();
     }
 
     /**
      * presigned url 발급
      *
-     * @param prefix   버킷 디렉토리 이름
-     * @param fileName 클라이언트가 전달한 파일명 파라미터
+     * @param fullFilePath   버킷 디렉토리 전체 경로
      * @return presigned url
      */
-    public String getPutPreSignedUrl(String prefix, String fileName) {
-        prefixAndFileNameValidCheck(prefix, fileName);
-
-        fileName = createPath(prefix, fileName);
-        GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePutPreSignedUrlRequest(bucket, fileName);
+    public String getPutPreSignedUrl(String fullFilePath) {
+        GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePutPreSignedUrlRequest(bucket, fullFilePath);
         URL url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);
         return url.toString();
     }
@@ -60,14 +52,14 @@ public class FileService {
      * 파일 업로드용(PUT) presigned url 생성
      *
      * @param bucket   버킷 이름
-     * @param fileName S3 업로드용 파일 이름
+     * @param fullFilePath   버킷 디렉토리 전체 경로
      * @return presigned url
      */
-    private GeneratePresignedUrlRequest getGeneratePutPreSignedUrlRequest(String bucket, String fileName) {
+    private GeneratePresignedUrlRequest getGeneratePutPreSignedUrlRequest(String bucket, String fullFilePath) {
         bucketAndFileNameValidCheck(bucket);
 
         GeneratePresignedUrlRequest generatePresignedUrlRequest =
-                new GeneratePresignedUrlRequest(bucket, fileName)
+                new GeneratePresignedUrlRequest(bucket, fullFilePath)
                         .withMethod(HttpMethod.PUT)
                         .withExpiration(getPreSignedUrlExpiration());
         generatePresignedUrlRequest.addRequestParameter(
@@ -104,8 +96,10 @@ public class FileService {
      * @param prefix 디렉토리 경로
      * @return 파일의 전체 경로
      */
-    private String createPath(String prefix, String fileName) {
-        return String.format("%s/%s", prefix, fileName);
+    public String createPath(String prefix, String fileName) {
+        prefixAndFileNameValidCheck(prefix, fileName);
+        String fileId = createFileId();
+        return String.format("%s/%s", prefix, fileId + fileName);
     }
 
     private void prefixAndFileNameValidCheck(String prefix, String fileName) {
