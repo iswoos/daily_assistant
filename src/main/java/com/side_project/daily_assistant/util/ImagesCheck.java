@@ -21,7 +21,7 @@ public class ImagesCheck {
 
     public static boolean imageListSizeMaximum(List<MultipartFile> images){
         if (images.size() > MAX_IMAGE_COUNT) {
-            new CustomException(ErrorCode.EXCEEDED_IMAGE_UPLOAD_MAX_COUNT);
+            throw new CustomException(ErrorCode.EXCEEDED_IMAGE_UPLOAD_MAX_COUNT);
         }
         return true;
     }
@@ -32,7 +32,7 @@ public class ImagesCheck {
             totalSize += image.getSize();
         }
         if (totalSize > MAX_TOTAL_IMAGE_SIZE) {
-            new CustomException(ErrorCode.EXCEEDED_MAX_TOTAL_IMAGE_SIZE);
+            throw new CustomException(ErrorCode.EXCEEDED_MAX_TOTAL_IMAGE_SIZE);
         }
         return true;
     }
