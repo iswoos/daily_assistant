@@ -2,13 +2,13 @@ package com.side_project.daily_assistant.domain.board;
 
 import com.side_project.daily_assistant.adapter.out.board.PostEntity;
 import com.side_project.daily_assistant.adapter.out.common.isDeleted;
-import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,7 +25,9 @@ public class Post {
 
     private String boardCategory;
 
-    private String image;
+    private String imageFolderUUID;
+
+    private List<String> imageUrls;
 
     private String postCategory;
 
@@ -47,7 +49,8 @@ public class Post {
             String userId,
             String title,
             String content,
-            String image,
+            String imageFolderUUID,
+            List<String> imageUrls,
             String postCategory,
             Long viewCount,
             Long likesCount,
@@ -59,7 +62,8 @@ public class Post {
         this.userId = userId;
         this.title = title;
         this.content = content;
-        this.image = image;
+        this.imageFolderUUID = imageFolderUUID;
+        this.imageUrls = imageUrls;
         this.postCategory = postCategory;
         this.viewCount = viewCount;
         this.likesCount = likesCount;
@@ -75,7 +79,8 @@ public class Post {
                 .userId(postEntity.getUserId())
                 .title(postEntity.getTitle())
                 .content(postEntity.getContent())
-                .image(postEntity.getImage())
+                .imageFolderUUID(postEntity.getImageFolderUUID())
+                .imageUrls(postEntity.getImageUrls())
                 .postCategory(postEntity.getPostCategory())
                 .viewCount(postEntity.getViewCount())
                 .likesCount(postEntity.getLikesCount())
@@ -92,7 +97,8 @@ public class Post {
                 .userId(post.getUserId())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .image(post.getImage())
+                .imageFolderUUID(post.getImageFolderUUID())
+                .imageUrls(post.getImageUrls())
                 .postCategory(post.getPostCategory())
                 .viewCount(post.getViewCount())
                 .likesCount(post.getLikesCount())
@@ -126,14 +132,14 @@ public class Post {
         this.likesCount++;
     }
 
-    public void updatedPostInfo(ModifyPostReq modifyPostReq) {
-        setPostInfo(modifyPostReq);
+    public void updatedPostInfo(ModifyPostReq modifyPostReq, List<String> images) {
+        setPostInfo(modifyPostReq, images);
     }
 
-    private void setPostInfo(ModifyPostReq modifyPostReq) {
+    private void setPostInfo(ModifyPostReq modifyPostReq, List<String> images) {
         this.title = modifyPostReq.title();
         this.content = modifyPostReq.content();
-        this.image = modifyPostReq.image();
+        this.imageUrls = images;
         this.postCategory = modifyPostReq.postCategory();
     }
 }
