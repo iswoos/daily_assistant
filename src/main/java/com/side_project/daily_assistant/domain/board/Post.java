@@ -2,12 +2,10 @@ package com.side_project.daily_assistant.domain.board;
 
 import com.side_project.daily_assistant.adapter.out.board.PostEntity;
 import com.side_project.daily_assistant.adapter.out.common.isDeleted;
-import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;

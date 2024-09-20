@@ -1,12 +1,10 @@
 package com.side_project.daily_assistant.adapter.out.board;
 
 import com.side_project.daily_assistant.application.port.out.board.CreatePostPort;
-import com.side_project.daily_assistant.domain.board.Post;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
