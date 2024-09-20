@@ -7,12 +7,16 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.side_project.daily_assistant.exception.CustomException;
 import com.side_project.daily_assistant.exception.ErrorCode;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import static com.side_project.daily_assistant.util.ValueCheck.valueNullOrEmpty;
@@ -27,22 +31,58 @@ public class FileService {
     private final AmazonS3 amazonS3;
 
     /**
-     * 파일의 URL을 반환
+     * 여러 MultipartFile에 대한 PUT presigned URL과 GET URL을 동시에 생성하는 메서드
+     *
+     * @param images 파일 리스트
+     * @param folderPath S3 폴더 경로 (예: board-image/imageFolderUUID)
+     * @return PUT presigned URL 리스트, GET URL 리스트를 포함한 imageUrlsResult 객체
+     */
+    public imageUrlsResult generatePreSignedPutUrlsAndGetUrls(List<MultipartFile> images, String folderPath) {
+        List<String> prePutSignedUrls = new ArrayList<>();
+        List<String> getImageUrls = new ArrayList<>();
+
+        for (MultipartFile image : images) {
+            String fileName = image.getOriginalFilename();
+            String fullFilePath = createPath(folderPath, fileName);
+
+            String putPreSignedUrl = getPutPreSignedUrl(fullFilePath);
+            prePutSignedUrls.add(putPreSignedUrl);
+
+            String getImageUrl = getFileUrl(fullFilePath);
+            getImageUrls.add(getImageUrl);
+        }
+
+        return new imageUrlsResult(prePutSignedUrls, getImageUrls);
+    }
+
+    @Getter
+    public static class imageUrlsResult {
+        private final List<String> prePutSignedUrls;
+        private final List<String> getImageUrls;
+
+        public imageUrlsResult(List<String> prePutSignedUrls, List<String> getImageUrls) {
+            this.prePutSignedUrls = prePutSignedUrls;
+            this.getImageUrls = getImageUrls;
+        }
+    }
+
+    /**
+     * 파일의 GET presigned url 반환
      *
      * @param fullFilePath   버킷 디렉토리 전체 경로
-     * @return 파일의 URL
+     * @return 파일의 GET presigned url
      */
-    public String getFileUrl(String fullFilePath) {
+    private String getFileUrl(String fullFilePath) {
         return amazonS3.getUrl(bucket, fullFilePath).toString();
     }
 
     /**
-     * presigned url 발급
+     * 파일의 PUT presigned url 반환
      *
      * @param fullFilePath   버킷 디렉토리 전체 경로
-     * @return presigned url
+     * @return 파일의 PUT presigned url
      */
-    public String getPutPreSignedUrl(String fullFilePath) {
+    private String getPutPreSignedUrl(String fullFilePath) {
         GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePutPreSignedUrlRequest(bucket, fullFilePath);
         URL url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);
         return url.toString();
@@ -53,7 +93,7 @@ public class FileService {
      *
      * @param bucket   버킷 이름
      * @param fullFilePath   버킷 디렉토리 전체 경로
-     * @return presigned url
+     * @return 파일의 PUT presigned url
      */
     private GeneratePresignedUrlRequest getGeneratePutPreSignedUrlRequest(String bucket, String fullFilePath) {
         bucketAndFileNameValidCheck(bucket);
