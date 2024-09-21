@@ -17,8 +17,8 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
     private final CommentRepository commentRepository;
 
     @Override
-    public String createComment(CreateCommentReq createCommentReq) {
-        PostEntity postEntity = postRepository.findById(createCommentReq.postId()).orElseThrow(
+    public String createComment(Long postId, CreateCommentReq createCommentReq) {
+        PostEntity postEntity = postRepository.findById(postId).orElseThrow(
                 () -> new CustomException(ErrorCode.POST_NOT_FOUND)
         );
 
@@ -28,7 +28,7 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
                     () -> new CustomException(ErrorCode.COMMENT_NOT_FOUND)
             );
 
-            if (parent.getPost().getId() != createCommentReq.postId()) {
+            if (parent.getPost().getId() != postId) {
                 new CustomException(ErrorCode.PARENT_COMMENT_MISMATCH);
             }
         }
