@@ -15,10 +15,11 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final CommentClosureRepository commentClosureRepository;
 
     @Override
-    public String createComment(CreateCommentReq createCommentReq) {
-        PostEntity postEntity = postRepository.findById(createCommentReq.postId()).orElseThrow(
+    public String createComment(Long postId, CreateCommentReq createCommentReq) {
+        PostEntity postEntity = postRepository.findById(postId).orElseThrow(
                 () -> new CustomException(ErrorCode.POST_NOT_FOUND)
         );
 
@@ -28,13 +29,19 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
                     () -> new CustomException(ErrorCode.COMMENT_NOT_FOUND)
             );
 
-            if (parent.getPost().getId() != createCommentReq.postId()) {
-                new CustomException(ErrorCode.PARENT_COMMENT_MISMATCH);
+            if (!parent.getPost().getId().equals(postId)) {
+                throw new CustomException(ErrorCode.PARENT_COMMENT_MISMATCH);
             }
         }
 
-        CommentEntity createComment = CommentEntity.craete(createCommentReq, postEntity, parent);
+        CommentEntity createComment = CommentEntity.create(createCommentReq, postEntity);
         commentRepository.save(createComment);
+
+        if (parent != null) {
+            CommentClosureEntity commentClosureEntity = CommentClosureEntity.create(parent, createComment);
+            commentClosureRepository.save(commentClosureEntity);
+        }
+
         return "댓글이 등록되었습니다";
     }
 }
