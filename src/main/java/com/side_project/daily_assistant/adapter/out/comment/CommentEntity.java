@@ -33,13 +33,6 @@ public class CommentEntity extends BaseEntity {
     @JoinColumn(name = "post_id")
     private PostEntity post;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private CommentEntity parent;
-
-    @OneToMany(mappedBy = "parent")
-    private List<CommentEntity> replies = new ArrayList<>();
-
     @Column(name = "user_id")
     private String userId;
 
@@ -52,7 +45,6 @@ public class CommentEntity extends BaseEntity {
     private CommentEntity(
             Long id,
             PostEntity post,
-            CommentEntity parent,
             String userId,
             String content,
             isDeleted is_deleted,
@@ -60,7 +52,6 @@ public class CommentEntity extends BaseEntity {
             LocalDateTime modifiedDateTime) {
         this.id = id;
         this.post = post;
-        this.parent = parent;
         this.userId = userId;
         this.content = content;
         this.is_deleted = is_deleted;
@@ -68,10 +59,9 @@ public class CommentEntity extends BaseEntity {
         this.modifiedDateTime = modifiedDateTime;
     }
 
-    public static CommentEntity craete(CreateCommentReq createCommentReq, PostEntity postEntity, CommentEntity commentEntity) {
+    public static CommentEntity create(CreateCommentReq createCommentReq, PostEntity postEntity) {
         return CommentEntity.builder()
                 .post(postEntity)
-                .parent(commentEntity)
                 .userId(createCommentReq.userId())
                 .content(createCommentReq.content())
                 .createdDateTime(LocalDateTime.now())
