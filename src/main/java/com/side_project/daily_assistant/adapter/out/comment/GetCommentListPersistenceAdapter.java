@@ -18,6 +18,34 @@ public class GetCommentListPersistenceAdapter implements GetCommentListPort {
 
     @Override
     public List<GetCommentRes> getCommentList(Long id) {
+        // 쿼리로 어떻게 풀지부터 생각해봐야할듯?
+        /* 특정 댓글의 바로 아래단계의 댓글 리스트만 추출하는 쿼리
+        select
+            *
+        FROM
+           comment AS c
+        JOIN
+            comment_closure cc ON c.comment_id = cc.child_comment_id
+        WHERE
+           cc.parent_comment_id = {8};
+
+        기획 의도
+        1. 게시물 조회 시, 최상단 루트의 댓글 목록이 노출됨
+        2. 그 중, 바로 아래 단계 댓글이 존재하는 것들은 count하여 답글 N개 형식으로 뜨게 함
+        3. 불러온 것들 중, 바로 아래 단계 댓글이 존재하는 것들은 동일하게 count한 값이 더 뜨게 함
+
+        // 맨 처음 게시물 조회했을 때 사용해하는 쿼리
+        select
+            *
+        from
+            comment as c
+        join
+            comment_clousre cc on c.comment_id = cc.child_comment_id
+        where
+            cc.
+
+
+        */
         List<CommentEntity> commentList = commentRepository.findAllByPostId(id);
         return commentList.stream()
                 .map(GetCommentRes::fromEntity)

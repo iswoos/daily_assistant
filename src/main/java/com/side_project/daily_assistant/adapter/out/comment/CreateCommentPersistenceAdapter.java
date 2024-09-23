@@ -24,6 +24,7 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
         );
 
         CommentEntity parent = null;
+        int depth = 0;
         if (createCommentReq.parentId() != null) {
             parent = commentRepository.findById(createCommentReq.parentId()).orElseThrow(
                     () -> new CustomException(ErrorCode.COMMENT_NOT_FOUND)
@@ -32,13 +33,17 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
             if (!parent.getPost().getId().equals(postId)) {
                 throw new CustomException(ErrorCode.PARENT_COMMENT_MISMATCH);
             }
+
+            depth = commentClosureRepository.findDepthByParentCommentId(createCommentReq.parentId())
+                    .map(d -> d + 1)
+                    .orElse(0);
         }
 
         CommentEntity createComment = CommentEntity.create(createCommentReq, postEntity);
         commentRepository.save(createComment);
 
         if (parent != null) {
-            CommentClosureEntity commentClosureEntity = CommentClosureEntity.create(parent, createComment);
+            CommentClosureEntity commentClosureEntity = CommentClosureEntity.create(parent, createComment, depth);
             commentClosureRepository.save(commentClosureEntity);
         }
 
