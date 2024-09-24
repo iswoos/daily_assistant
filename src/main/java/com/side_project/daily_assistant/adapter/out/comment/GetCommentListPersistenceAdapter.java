@@ -43,9 +43,11 @@ public class GetCommentListPersistenceAdapter implements GetCommentListPort {
             comment_clousre cc on c.comment_id = cc.child_comment_id
         where
             cc.
-
-
         */
+
+        // depth가 없는 것들이랑, 0인 댓글들 모두 조회하게 함.
+        // 답글 보기 누를 경우, postId에 맞는 게시물들 중, parentID를 가지는 댓글들 중 depth가 그 다음 단계인 걸 가지는 댓글들을 가져옴
+
         List<CommentEntity> commentList = commentRepository.findAllByPostId(id);
         return commentList.stream()
                 .map(GetCommentRes::fromEntity)
