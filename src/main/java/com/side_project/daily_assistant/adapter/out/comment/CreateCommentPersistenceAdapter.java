@@ -42,10 +42,8 @@ public class CreateCommentPersistenceAdapter implements CreateCommentPort {
         CommentEntity createComment = CommentEntity.create(createCommentReq, postEntity);
         commentRepository.save(createComment);
 
-        if (parent != null) {
-            CommentClosureEntity commentClosureEntity = CommentClosureEntity.create(parent, createComment, depth);
-            commentClosureRepository.save(commentClosureEntity);
-        }
+        CommentClosureEntity commentClosureEntity = CommentClosureEntity.create(parent, createComment, depth);
+        commentClosureRepository.save(commentClosureEntity);
 
         return "댓글이 등록되었습니다";
     }

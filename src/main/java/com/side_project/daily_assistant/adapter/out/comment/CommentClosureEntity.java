@@ -29,7 +29,7 @@ public class CommentClosureEntity extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_comment_id", nullable = false)
+    @JoinColumn(name = "parent_comment_id")
     private CommentEntity parentComment;
 
     @ManyToOne(fetch = FetchType.LAZY)
