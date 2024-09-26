@@ -18,7 +18,6 @@ public class GetCommentListPersistenceAdapter implements GetCommentListPort {
 
     @Override
     public List<GetCommentRes> getCommentList(Long postId) {
-
         List<CommentEntity> commentList = commentRepository.findTopLevelCommentsByPostId(postId);
         return commentList.stream()
                 .map(comment -> {
@@ -29,7 +28,7 @@ public class GetCommentListPersistenceAdapter implements GetCommentListPort {
     }
 
     @Override
-    public List<GetCommentRes> getChildCommentList(Long postId, Long parentId) {
+    public List<GetCommentRes> getChildCommentList(Long parentId) {
         List<CommentEntity> commentList = commentRepository.findChildCommentsByParentId(parentId);
         return commentList.stream()
                 .map(comment -> {

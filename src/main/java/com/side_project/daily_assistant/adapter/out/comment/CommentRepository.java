@@ -11,17 +11,14 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
     List<CommentEntity> findAllByPostId(Long postId);
 
-    // 최상위 댓글 조회 (parentComment가 없는 댓글)
-    @Query("SELECT c FROM CommentEntity c WHERE c.post.id = :postId AND c.id NOT IN (SELECT cc.childComment.id FROM CommentClosureEntity cc)")
+    @Query("SELECT c FROM CommentEntity c " +
+            "JOIN CommentClosureEntity cc ON c.id = cc.childComment.id " +
+            "WHERE c.post.id = :postId AND cc.parentComment.id IS NULL")
     List<CommentEntity> findTopLevelCommentsByPostId(@Param("postId") Long postId);
 
-    // 특정 parentId에 해당하는 하위 댓글 조회
     @Query("SELECT cc.childComment FROM CommentClosureEntity cc WHERE cc.parentComment.id = :parentId")
     List<CommentEntity> findChildCommentsByParentId(@Param("parentId") Long parentId);
 
-    // 특정 parentId에 해당하는 하위 댓글 개수 조회
     @Query("SELECT COUNT(cc) FROM CommentClosureEntity cc WHERE cc.parentComment.id = :parentId")
     int countRepliesByParentId(@Param("parentId") Long parentId);
-
-//    Optional<CommentEntity> findByParentId(Long parentId);
 }

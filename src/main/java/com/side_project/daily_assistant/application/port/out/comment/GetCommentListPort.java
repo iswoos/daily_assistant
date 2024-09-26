@@ -8,5 +8,5 @@ import java.util.List;
 public interface GetCommentListPort {
     List<GetCommentRes> getCommentList(Long postId);
 
-    List<GetCommentRes> getChildCommentList(Long postId, Long parentId);
+    List<GetCommentRes> getChildCommentList(Long parentId);
 }

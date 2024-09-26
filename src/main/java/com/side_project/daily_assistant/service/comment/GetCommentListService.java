@@ -20,7 +20,7 @@ public class GetCommentListService implements GetCommentListUseCase {
     }
 
     @Override
-    public List<GetCommentRes> getChildCommentList(Long postId, Long parentId) {
-        return getCommentListPort.getChildCommentList(postId, parentId);
+    public List<GetCommentRes> getChildCommentList(Long parentId) {
+        return getCommentListPort.getChildCommentList(parentId);
     }
 }

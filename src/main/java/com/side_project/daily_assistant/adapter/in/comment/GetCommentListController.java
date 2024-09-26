@@ -26,8 +26,8 @@ public class GetCommentListController {
 
     // 부모 댓글 하위내역 조회
     @GetMapping("/comments/{postId}/{parentId}")
-    public ResponseEntity<ApiResponse<List<GetCommentRes>>> getCommentList(@PathVariable Long postId, @PathVariable Long parentId) {
-        ApiResponse<List<GetCommentRes>> response = ApiResponse.ok(getCommentListUseCase.getChildCommentList(postId,parentId));
+    public ResponseEntity<ApiResponse<List<GetCommentRes>>> getChildCommentList(@PathVariable Long postId, @PathVariable Long parentId) {
+        ApiResponse<List<GetCommentRes>> response = ApiResponse.ok(getCommentListUseCase.getChildCommentList(parentId));
         return ApiResponse.toResponseEntity(response);
     }
 }
