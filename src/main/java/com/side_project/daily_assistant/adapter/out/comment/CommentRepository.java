@@ -12,11 +12,15 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
     List<CommentEntity> findAllByPostId(Long postId);
 
     @Query("SELECT c FROM CommentEntity c " +
+            "JOIN FETCH c.post " +
             "JOIN CommentClosureEntity cc ON c.id = cc.childComment.id " +
             "WHERE c.post.id = :postId AND cc.parentComment.id IS NULL")
     List<CommentEntity> findTopLevelCommentsByPostId(@Param("postId") Long postId);
 
-    @Query("SELECT cc.childComment FROM CommentClosureEntity cc WHERE cc.parentComment.id = :parentId")
+    @Query("SELECT c FROM CommentClosureEntity cc " +
+            "JOIN cc.childComment c " +
+            "JOIN FETCH c.post " +
+            "WHERE cc.parentComment.id = :parentId")
     List<CommentEntity> findChildCommentsByParentId(@Param("parentId") Long parentId);
 
     @Query("SELECT COUNT(cc) FROM CommentClosureEntity cc WHERE cc.parentComment.id = :parentId")
