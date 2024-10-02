@@ -1,9 +1,9 @@
 package com.side_project.daily_assistant.adapter.out.board;
 
-import com.side_project.daily_assistant.adapter.out.comment.CommentEntity;
 import com.side_project.daily_assistant.adapter.out.common.isDeleted;
 import com.side_project.daily_assistant.domain.BaseEntity;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
+import com.side_project.daily_assistant.util.StringListConverter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,7 +13,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -38,7 +37,10 @@ public class PostEntity extends BaseEntity {
 
     private String content;
 
-    private String image;
+    private String imageFolderUUID;
+
+    @Convert(converter = StringListConverter.class)
+    private List<String> imageUrls;
 
     @Column(name = "post_category")
     private String postCategory;
@@ -48,9 +50,6 @@ public class PostEntity extends BaseEntity {
 
     @Column(name = "likes_count")
     private Long likesCount;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
-    private List<CommentEntity> comments  = new ArrayList<>();
 
     @Column(name = "is_deleted")
     @Enumerated(EnumType.STRING)
@@ -64,7 +63,8 @@ public class PostEntity extends BaseEntity {
             String userId,
             String title,
             String content,
-            String image,
+            String imageFolderUUID,
+            List<String> imageUrls,
             String postCategory,
             Long viewCount,
             Long likesCount,
@@ -76,7 +76,8 @@ public class PostEntity extends BaseEntity {
         this.userId = userId;
         this.title = title;
         this.content = content;
-        this.image = image;
+        this.imageFolderUUID = imageFolderUUID;
+        this.imageUrls = imageUrls;
         this.postCategory = postCategory;
         this.viewCount = viewCount;
         this.likesCount = likesCount;
@@ -85,13 +86,14 @@ public class PostEntity extends BaseEntity {
         this.modifiedDateTime = modifiedDateTime;
     }
 
-    public static PostEntity create(CreatePostReq createPostReq) {
+    public static PostEntity create(CreatePostReq createPostReq, String imageFolderUUID, List<String> imageUrls) {
         return PostEntity.builder()
                 .userId(createPostReq.userId())
                 .title(createPostReq.title())
                 .content(createPostReq.content())
-                .image(createPostReq.image())
                 .postCategory(createPostReq.postCategory())
+                .imageFolderUUID(imageFolderUUID)
+                .imageUrls(imageUrls)
                 .createdDateTime(LocalDateTime.now())
                 .modifiedDateTime(LocalDateTime.now())
                 .build();

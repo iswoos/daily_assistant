@@ -15,7 +15,7 @@ public class CreateCommentService implements CreateCommentUseCase {
     private final CreateCommentPort createCommentPort;
 
     @Override
-    public String createComment(CreateCommentReq createCommentReq) {
-        return createCommentPort.createComment(createCommentReq);
+    public String createComment(Long postId, CreateCommentReq createCommentReq) {
+        return createCommentPort.createComment(postId, createCommentReq);
     }
 }
