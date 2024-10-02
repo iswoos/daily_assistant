@@ -17,10 +17,17 @@ public class GetCommentListController {
 
     private final GetCommentListUseCase getCommentListUseCase;
 
-    // 댓글 조회
+    // 최초 댓글 조회
     @GetMapping("/comments/{postId}")
     public ResponseEntity<ApiResponse<List<GetCommentRes>>> getCommentList(@PathVariable Long postId) {
         ApiResponse<List<GetCommentRes>> response = ApiResponse.ok(getCommentListUseCase.getCommentList(postId));
+        return ApiResponse.toResponseEntity(response);
+    }
+
+    // 부모 댓글 하위내역 조회
+    @GetMapping("/comments/{postId}/{parentId}")
+    public ResponseEntity<ApiResponse<List<GetCommentRes>>> getChildCommentList(@PathVariable Long postId, @PathVariable Long parentId) {
+        ApiResponse<List<GetCommentRes>> response = ApiResponse.ok(getCommentListUseCase.getChildCommentList(parentId));
         return ApiResponse.toResponseEntity(response);
     }
 }

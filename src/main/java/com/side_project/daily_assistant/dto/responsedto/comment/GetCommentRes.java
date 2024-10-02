@@ -10,7 +10,8 @@ public record GetCommentRes(
         Long id,
         String userId,
         String content,
-        LocalDateTime createdDateTime
+        LocalDateTime createdDateTime,
+        int replyCount
 ) {
 
     @Builder
@@ -18,19 +19,22 @@ public record GetCommentRes(
             Long id,
             String userId,
             String content,
-            LocalDateTime createdDateTime) {
+            LocalDateTime createdDateTime,
+            int replyCount) {
         this.id = id;
         this.userId = userId;
         this.content = content;
         this.createdDateTime = createdDateTime;
+        this.replyCount = replyCount;
     }
 
-    public static GetCommentRes fromEntity(CommentEntity commentEntity) {
+    public static GetCommentRes fromEntity(CommentEntity commentEntity, int replyCount) {
         return GetCommentRes.builder()
                 .id(commentEntity.getId())
                 .userId(commentEntity.getUserId())
                 .content(commentEntity.getContent())
                 .createdDateTime(commentEntity.getCreatedDateTime())
+                .replyCount(replyCount)
                 .build();
     }
 

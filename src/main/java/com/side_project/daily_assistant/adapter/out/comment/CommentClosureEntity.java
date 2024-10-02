@@ -29,12 +29,15 @@ public class CommentClosureEntity extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_comment_id", nullable = false)
+    @JoinColumn(name = "parent_comment_id")
     private CommentEntity parentComment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "child_comment_id", nullable = false)
     private CommentEntity childComment;
+
+    @Column(name = "depth", nullable = false)
+    private int depth;
 
     @Column(name = "is_deleted")
     @Enumerated(EnumType.STRING)
@@ -45,21 +48,24 @@ public class CommentClosureEntity extends BaseEntity {
             Long id,
             CommentEntity parentComment,
             CommentEntity childComment,
+            int depth,
             isDeleted isDeleted,
             LocalDateTime createdDateTime,
             LocalDateTime modifiedDateTime) {
         this.id = id;
         this.parentComment = parentComment;
         this.childComment = childComment;
+        this.depth = depth;
         this.isDeleted = isDeleted;
         this.createdDateTime = createdDateTime;
         this.modifiedDateTime = modifiedDateTime;
     }
 
-    public static CommentClosureEntity create(CommentEntity parent, CommentEntity createComment) {
+    public static CommentClosureEntity create(CommentEntity parent, CommentEntity createComment, int depth) {
         return CommentClosureEntity.builder()
                 .parentComment(parent)
                 .childComment(createComment)
+                .depth(depth)
                 .createdDateTime(LocalDateTime.now())
                 .modifiedDateTime(LocalDateTime.now())
                 .build();
