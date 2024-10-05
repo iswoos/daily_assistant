@@ -6,6 +6,7 @@ import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +17,8 @@ public class GetPostListPersistenceAdapter implements GetPostListPort {
     private final PostRepository postRepository;
 
     @Override
-    public List<GetPostRes> getPostList() {
-        List<PostEntity> postEntityList = postRepository.findAllByIsDeleted(isDeleted.N);
+    public List<GetPostRes> getPostList(Pageable pageable) {
+        List<PostEntity> postEntityList = postRepository.findAllByIsDeleted(isDeleted.N, pageable);
         return postEntityList.stream()
                 .map(GetPostRes::fromEntity)
                 .collect(Collectors.toList());
