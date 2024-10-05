@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -18,8 +19,8 @@ public class GetPostListController {
 
     // 게시글 전체조회
     @GetMapping("/posts")
-    public ResponseEntity<ApiResponse<List<GetPostRes>>> getPostList(){
-        ApiResponse<List<GetPostRes>> response = ApiResponse.ok(getPostListUseCase.getPostList());
+    public ResponseEntity<ApiResponse<List<GetPostRes>>> getPostList(Pageable pageable){
+        ApiResponse<List<GetPostRes>> response = ApiResponse.ok(getPostListUseCase.getPostList(pageable));
         return ApiResponse.toResponseEntity(response);
     }
 }
