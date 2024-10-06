@@ -1,6 +1,6 @@
 package com.side_project.daily_assistant.dto.responsedto.board;
 
-import com.side_project.daily_assistant.adapter.out.board.PostEntity;
+import com.side_project.daily_assistant.adapter.board.out.PostEntity;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

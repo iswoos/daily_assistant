@@ -1,10 +1,9 @@
 package com.side_project.daily_assistant.dto.responsedto.comment;
 
-import com.side_project.daily_assistant.adapter.out.comment.CommentEntity;
+import com.side_project.daily_assistant.adapter.comment.out.CommentEntity;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record GetCommentRes(
         Long id,

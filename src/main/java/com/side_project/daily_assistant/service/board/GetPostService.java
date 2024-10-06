@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.board;
 
-import com.side_project.daily_assistant.application.port.in.board.GetPostUseCase;
-import com.side_project.daily_assistant.application.port.out.board.GetPostPort;
+import com.side_project.daily_assistant.application.port.board.in.GetPostUseCase;
+import com.side_project.daily_assistant.application.port.board.out.GetPostPort;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

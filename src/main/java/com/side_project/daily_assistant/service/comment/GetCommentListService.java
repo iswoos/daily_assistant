@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.comment;
 
-import com.side_project.daily_assistant.application.port.in.comment.GetCommentListUseCase;
-import com.side_project.daily_assistant.application.port.out.comment.GetCommentListPort;
+import com.side_project.daily_assistant.application.port.comment.in.GetCommentListUseCase;
+import com.side_project.daily_assistant.application.port.comment.out.GetCommentListPort;
 import com.side_project.daily_assistant.dto.responsedto.comment.GetCommentRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

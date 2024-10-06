@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.board;
 
-import com.side_project.daily_assistant.application.port.in.board.CreatePostUseCase;
-import com.side_project.daily_assistant.application.port.out.board.CreatePostPort;
+import com.side_project.daily_assistant.application.port.board.in.CreatePostUseCase;
+import com.side_project.daily_assistant.application.port.board.out.CreatePostPort;
 import com.side_project.daily_assistant.dto.requestdto.board.CreatePostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import com.side_project.daily_assistant.util.s3.FileService;
