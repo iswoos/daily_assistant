@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.board;
 
-import com.side_project.daily_assistant.application.port.in.board.PatchPostUseCase;
-import com.side_project.daily_assistant.application.port.out.board.PatchPostPort;
+import com.side_project.daily_assistant.application.port.board.in.PatchPostUseCase;
+import com.side_project.daily_assistant.application.port.board.out.PatchPostPort;
 import com.side_project.daily_assistant.dto.requestdto.board.ModifyPostReq;
 import com.side_project.daily_assistant.dto.responsedto.board.GetPostRes;
 import lombok.RequiredArgsConstructor;

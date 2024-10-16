@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.comment;
 
-import com.side_project.daily_assistant.application.port.in.comment.CreateCommentUseCase;
-import com.side_project.daily_assistant.application.port.out.comment.CreateCommentPort;
+import com.side_project.daily_assistant.application.port.comment.in.CreateCommentUseCase;
+import com.side_project.daily_assistant.application.port.comment.out.CreateCommentPort;
 import com.side_project.daily_assistant.dto.requestdto.comment.CreateCommentReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

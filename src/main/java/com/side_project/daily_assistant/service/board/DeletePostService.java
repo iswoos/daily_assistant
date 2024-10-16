@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.board;
 
-import com.side_project.daily_assistant.application.port.in.board.DeletePostUseCase;
-import com.side_project.daily_assistant.application.port.out.board.DeletePostPort;
+import com.side_project.daily_assistant.application.port.board.in.DeletePostUseCase;
+import com.side_project.daily_assistant.application.port.board.out.DeletePostPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

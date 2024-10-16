@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.board;
 
-import com.side_project.daily_assistant.application.port.in.board.LikePostUseCase;
-import com.side_project.daily_assistant.application.port.out.board.LikePostPort;
+import com.side_project.daily_assistant.application.port.board.in.LikePostUseCase;
+import com.side_project.daily_assistant.application.port.board.out.LikePostPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

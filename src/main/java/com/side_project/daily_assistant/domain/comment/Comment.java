@@ -1,6 +1,6 @@
 package com.side_project.daily_assistant.domain.comment;
 
-import com.side_project.daily_assistant.adapter.out.common.isDeleted;
+import com.side_project.daily_assistant.adapter.common.isDeleted;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;

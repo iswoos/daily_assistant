@@ -1,7 +1,7 @@
 package com.side_project.daily_assistant.service.member;
 
-import com.side_project.daily_assistant.application.port.in.member.RegisterMemberUseCase;
-import com.side_project.daily_assistant.application.port.out.member.RegisterMemberPort;
+import com.side_project.daily_assistant.application.port.member.in.RegisterMemberUseCase;
+import com.side_project.daily_assistant.application.port.member.out.RegisterMemberPort;
 import com.side_project.daily_assistant.dto.requestdto.member.RegisterMemberReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
