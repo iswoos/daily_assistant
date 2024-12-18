@@ -42,36 +42,6 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private isDeleted isDeleted;
 
-    @Builder
-    private Post(
-            Long id,
-            String boardCategory,
-            String userId,
-            String title,
-            String content,
-            String imageFolderUUID,
-            List<String> imageUrls,
-            String postCategory,
-            Long viewCount,
-            Long likesCount,
-            isDeleted isDeleted,
-            LocalDateTime createdDateTime,
-            LocalDateTime modifiedDateTime) {
-        this.id = id;
-        this.boardCategory = boardCategory;
-        this.userId = userId;
-        this.title = title;
-        this.content = content;
-        this.imageFolderUUID = imageFolderUUID;
-        this.imageUrls = imageUrls;
-        this.postCategory = postCategory;
-        this.viewCount = viewCount;
-        this.likesCount = likesCount;
-        this.isDeleted = isDeleted;
-        this.createdDateTime = createdDateTime;
-        this.modifiedDateTime = modifiedDateTime;
-    }
-
     public static Post fromEntity(PostEntity postEntity) {
         return Post.builder()
                 .id(postEntity.getId())
